@@ -1,0 +1,25 @@
+<ion-view view-title="Buscar">
+	<ion-content>
+		<ion-refresher
+				pulling-text="Tira para actualizar..."
+				on-refresh="vm.recargar()">
+		</ion-refresher>
+		<ion-list>
+			<label class="item item-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" ng-model="vm.searchText" placeholder="Buscar por título">
+			</label>
+			<ion-item class="item-thumbnail-left item-text-wrap" ui-sref="app.detail({id: comic.id})"
+			          ng-repeat="comic in vm.comics">
+				<img ng-src="{{vm.obtenerImagen(comic)}}">
+				<h2 ng-bind="comic.title"></h2>
+				<p>Año: <b ng-bind="vm.obtenerAnio(comic)"></b></p>
+				<p ng-bind-html="comic.description"></p>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll
+				ng-if="vm.existenMas()"
+				on-infinite="vm.siguiente()">
+		</ion-infinite-scroll>
+	</ion-content>
+</ion-view>

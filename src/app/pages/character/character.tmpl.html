@@ -1,0 +1,18 @@
+<ion-view>
+	<ion-nav-title>{{ vm.character.name }}</ion-nav-title>
+	<ion-content>
+		<!-- NOMBRE -->
+		<ion-item class="item-text-wrap">
+			<h2 class="text-center">
+				<b ng-bind="vm.character.name"></b>
+			</h2>
+		</ion-item>
+		<!-- IMAGEN -->
+		<ion-item class="item-image">
+			<img ng-src="{{vm.obtenerImage()}}">
+		</ion-item>
+		<ion-item>
+			<p ng-bind-html="vm.character.description"></p>
+		</ion-item>
+	</ion-content>
+</ion-view>

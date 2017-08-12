@@ -1,0 +1,59 @@
+<ion-view>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon"
+		        ng-class="{'ion-ios-heart-outline': !vm.favorite, 'ion-ios-heart': vm.favorite}"
+		        ng-click="vm.agregarFav()"></button>
+	</ion-nav-buttons>
+	<ion-nav-title>{{ vm.comic.title }}</ion-nav-title>
+	<ion-content>
+		<!-- TITULO -->
+		<ion-item class="item-text-wrap">
+			<h2 class="text-center">
+				<b ng-bind="vm.comic.title"></b>
+			</h2>
+		</ion-item>
+		<!-- IMAGEN -->
+		<ion-item class="item-image">
+			<img ng-src="{{vm.obtenerImage()}}">
+		</ion-item>
+		<!-- PRECIOS -->
+		<div ng-if="vm.comic.prices && vm.comic.prices.length > 0">
+			<ion-item class="item-divider">Precio</ion-item>
+			<ion-item ng-repeat="precio in vm.comic.prices track by $index">
+				<div class="row">
+					<div class="col text-left" ng-bind="vm.nombrePrecio(precio.type)"></div>
+					<div class="col text-right"><b>USD {{precio.price}}</b></div>
+				</div>
+			</ion-item>
+			<ion-item>
+				<a target="_blank" ng-href="{{ vm.obtenerLink() }}"
+				   class="button button-block button-positive">Comprar</a>
+			</ion-item>
+		</div>
+		<!-- DETALLES -->
+		<ion-item class="item-divider">Detalles</ion-item>
+		<ion-item class="item-text-wrap">
+			<b>Número #{{vm.comic.issueNumber}}</b>
+		</ion-item>
+		<ion-item class="item-text-wrap">
+			<p ng-bind-html="vm.comic.description"></p>
+		</ion-item>
+		<!-- CREADORES -->
+		<div ng-if="vm.comic.creators && vm.comic.creators.available > 0">
+			<ion-item class="item-divider">Creadores</ion-item>
+			<ion-item ng-repeat="creator in vm.comic.creators.items">
+				<h2 ng-bind="creator.name"></h2>
+			</ion-item>
+		</div>
+		<!-- PERSONAJES -->
+		<div ng-if="vm.comic.characters && vm.comic.characters.available > 0">
+			<ion-item class="item-divider">Personajes</ion-item>
+			<ion-item class="item-icon-right" ng-click="vm.verCharacter(character)"
+			          ng-repeat="character in vm.comic.characters.items">
+				<h2 ng-bind="character.name"></h2>
+				<i class="icon ion-chevron-right"></i>
+			</ion-item>
+		</div>
+
+	</ion-content>
+</ion-view>
